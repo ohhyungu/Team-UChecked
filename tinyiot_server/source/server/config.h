@@ -6,8 +6,8 @@
 #define SERVER_TYPE IN_CSE
 
 // #define NIC_NAME "eth0"
-#define SERVER_IP "127.0.0.1"
-#define SERVER_PORT "3000"
+#define SERVER_IP "10.0.2.15"
+#define SERVER_PORT "50000"
 #define CSE_BASE_NAME "TinyIoT"
 #define CSE_BASE_RI "tinyiot"
 #define CSE_BASE_SP_ID "tinyiot.example.com"
