@@ -1,0 +1,62 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>출석 체크 알림</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <style>
+        body {
+            padding-top: 50px;
+        }
+        .notification {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">출석 체크 알림 시스템</h1>
+        <p class="text-center">출석 체크가 감지되면 알림이 표시됩니다.</p>
+    </div>
+
+    <div class="notification">
+        <!-- 알림이 여기서 표시됩니다 -->
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+        socket.on('connect', function() {
+            console.log('SocketIO에 연결되었습니다.');
+        });
+
+        socket.on('new_attendance', function(data) {
+            console.log('새로운 출석 데이터:', data);
+            showNotification(data);
+        });
+
+        function showNotification(data) {
+            var notification = `
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>출석 확인!</strong> 학생 ID: ${data.student_id} (${data.student_name})<br>
+                    강좌: ${data.course_id} - ${data.course_name}<br>
+                    시간: ${data.attendance_time}<br>
+                    상태: ${data.attendance_status}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            `;
+            $('.notification').append(notification);
+        }
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>
