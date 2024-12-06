@@ -20,6 +20,18 @@ Our solution utilizes the **oneM2M Mobius platform** to deliver the following fe
 
 This system enhances efficiency and contributes to improving the learning environment.
 
+## Features and Functionalities
+### 1. **Sensor Data Collection**
+- Sends simulated temperature and presence data to the Mobius server.
+- Stores sensor data in a `SensorAE` container on the server.  
+  
+### 2. **Actuator Control**
+- Analyzes the latest sensor data and sends control commands, such as turning on/off heating systems, based on predefined conditions.
+- Uses the `ControlAE` container to send commands to actuators.  
+
+### 3. **Data Monitoring**
+- Retrieves the latest attendance records and sensor data in real-time from the Mobius server.  
+
 ## oneM2M Features Used
 
 This project leverages the following key features of the **oneM2M standard**:
@@ -27,6 +39,8 @@ This project leverages the following key features of the **oneM2M standard**:
 1. **Container**:
    - A container (`attendance`) is created to store attendance data.
    - Facilitates hierarchical data management and organization.
+   - Containers (`attendance`, `SensorAE`, `ControlAE`) are created to organize data hierarchically.
+   - Used for efficient data management and retrieval.  
 
 2. **ContentInstance**:
    - Each student's attendance record is stored as a `ContentInstance`.
@@ -48,6 +62,10 @@ These features enable seamless storage, management, and retrieval of attendance 
 - Key files:
   - `main.py`: Main execution script.
   - `mobius.py`: Handles communication with the Mobius server.
+  - `sensor_data.py`: Sends sensor data (temperature and presence) to the Mobius server and stores it in a database.
+   - `control_data.py`: Analyzes sensor data and sends commands (e.g., turn on/off heating) to the Mobius server.
+   - `actuator_control.py`: Retrieves commands from the Mobius server and executes actions accordingly.
+
 
 ### 3. Virtual Beacon
 - Simulates student ID input and transmits it to the Mobius server.
@@ -63,10 +81,21 @@ Mobius (CSEBase)
 └── attendance (Container)   
 ├── latest (Link to the latest contentInstance)   
 └── {resourceName} (ContentInstance: Each attendance record)   
+├── SensorAE (Container)  
+│   ├── temperature (ContentInstance)  
+│   └── presence (ContentInstance)  
+├── ControlAE (Container)  
+│   └── commands (ContentInstance)  
+└── ActuatorAE (Container)  
+    └── actions (ContentInstance)
+
 ### Data Flow
 1. Python script sends student ID data to the Mobius server (`POST` request).
 2. Mobius stores the data as a `ContentInstance`.
 3. Users retrieve the latest data using a `GET /latest` request.
+4. The control script analyzes the sensor data and sends commands to the Mobius server.
+5. Actuator script retrieves commands and performs the corresponding actions.
+
 
 ## How to Execute
 
@@ -82,6 +111,21 @@ Mobius (CSEBase)
 - Execute the main.py script to send and retrieve attendance data:
   ```bash
   python main.py
+
+### Execute the sensor data script to send sensor data to the Mobius server:
+  
+  ```bash
+  python sensor_data.py
+
+### Execute the control data script to analyze data and send commands:
+   
+   ```bash
+   python control_data.py
+
+### Execute the actuator control script to retrieve commands and perform actions:
+
+   ```bash
+   python actuator_control.py
 
 
 # Smart Campus Web Application
