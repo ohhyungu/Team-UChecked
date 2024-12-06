@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>지도 웹</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <style>
+        /* 지도의 크기를 설정합니다 */
+        #map {
+            height: 90vh; /* 화면 전체를 지도에 사용 */
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div> <!-- 지도가 표시될 영역 -->
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // 1. 지도 생성
+        const map = L.map('map', {
+            center:[38.550720, 127.073987],
+            zoom: 17,
+            minZoom:17,
+            maxZoom:17
+        }).setView([38.550720, 127.073987], 17); // 서울 좌표와 줌 레벨
+
+        // 2. OSM 타일 레이어 추가
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 17,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // 3. 마커 추가
+        const marker = L.marker([37.550720, 127.073987]).addTo(map);
+        marker.bindPopup('<b>서울!</b><br>여기가 서울입니다.').openPopup();
+
+        // 4. 지도 이동 제한 설정 (서울 중심 좌표 기준)
+        const bounds = L.latLngBounds(
+            [38.550720, 127.073987], // 남서쪽 좌표
+            [38.550720, 127.073987]  // 북동쪽 좌표
+        );
+        map.setMaxBounds(bounds); // 지도 이동 제한
+        map.on('drag', function() {
+            map.panInsideBounds(bounds, { animate: false });
+        });
+    </script>
+</body>
+</html>

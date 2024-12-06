@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <style>
+        /* Page styling */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Background image styling */
+        .background-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://codinging.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Fa86e5034-1658-4a84-866e-98bcc4ee77f4%2F7eddf516-d037-42a5-bd1f-46a9824a4658%2F%25EB%258C%2580%25EC%2596%2591ai%25EC%2584%25BC%25ED%2584%25B0.png?table=block&id=151e8121-5f53-800a-b172-c3cbba158c8d&spaceId=a86e5034-1658-4a84-866e-98bcc4ee77f4&width=1420&userId=&cache=v2') no-repeat center center;
+            background-size: cover;
+        }
+
+        /* Clickable panel container */
+        .side-panel {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px; /* Panel width */
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: -5px 0 10px rgba(0, 0, 0, 0.2);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        /* Panel open state */
+        .side-panel.open {
+            transform: translateX(0);
+        }
+
+        /* Toggle button */
+        .toggle-button {
+            position: absolute;
+            top: 5%;
+            right: 300px;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.3s;
+        }
+
+        .toggle-button:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        /* Clickable boxes */
+        .box {
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .box:hover {
+            background: #e0e0e0;
+        }
+        </style>
+</head>
+<body>
+    <!-- Background image -->
+    <div class="background-container"></div>
+
+    <!-- Expandable clickable panel -->
+    <div class="side-panel" id="sidePanel">
+        <div class="box" onclick="alert('Box 1 clicked!')">Box 1</div>
+        <div class="box" onclick="alert('Box 2 clicked!')">Box 2</div>
+        <div class="box" onclick="alert('Box 3 clicked!')">Box 3</div>
+    </div>
+
+    <!-- Button -->
+    <button class="toggle-button" id="toggleButton">click</button>
+
+    <script>
+        // Toggle button functionality
+        const toggleButton = document.getElementById('toggleButton');
+        const sidePanel = document.getElementById('sidePanel');
+
+        toggleButton.addEventListener('click', () => {
+            sidePanel.classList.toggle('open');
+        });
+    </script>
+</body>
+
+</html>

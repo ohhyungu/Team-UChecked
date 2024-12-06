@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sejong University Whole Map</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <style>
+        /* setting size of map's */
+        #map {
+            height: 90vh;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div> <!-- map will be locate -->
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // 1. map generate
+        const map = L.map('map', {
+            center:[37.550720, 127.073987],
+            zoom: 17,
+            minZoom:17,
+            maxZoom:17
+        }).setView([37.550720, 127.073987], 17); // sejong university middle location, zoom level
+
+        // 2. Add OSM tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 17,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // 3. Marker which point each structure
+        // Daeyang AI Center
+        const daeyangAI = L.marker([37.551020, 127.075661]).addTo(map);
+        daeyangAI.bindPopup('<b>Daeyang AI Center!</b><br><a href="/daeyangai" target="_blank"> Check building facilities </a>').openPopup();
+        
+        // Dongcheon-gwan(University Library)
+        const central_library = L.marker([37.551648, 127.074329]).addTo(map);
+        central_library.bindPopup('<b>Sejong University Central Library!</b><br><a href="test.html" target="_blank"> Check building facilities </a>').openPopup();
+
+        // Jingwan Hall
+        const jingwan = L.marker([37.550904, 127.073294]).addTo(map);
+        jingwan.bindPopup('<b>Jingwan Hall!</b><br><a href="test.html" target="_blank"> Check building facilities </a>').openPopup();
+
+        // Student Center
+        const student_center = L.marker([37.549602, 127.075167]).addTo(map);
+        student_center.bindPopup('<b>Student Center!</b><br><a href="test.html" target="_blank"> Check building facilities </a>').openPopup();
+
+        // Gwanggaeto-gwan
+        const gwanggaeto_gwan = L.marker([37.550275, 127.073124]).addTo(map);
+        gwanggaeto_gwan.bindPopup('<b>Gwanggaeto-gwan!</b><br><a href="test.html" target="_blank"> Check building facilities </a>').openPopup();
+
+        // Gunja-gwan
+        const gunja_gwan = L.marker([37.549613, 127.073729]).addTo(map);
+        gunja_gwan.bindPopup('<b>Gunja-gwan!</b><br><a href="test.html" target="_blank"> Check building facilities </a>').openPopup();
+
+
+
+        // const marker = L.marker([37.550720, 127.073987]).addTo(map);
+        // marker.bindPopup('<b>seoul!</b><br>This is Seoul.').openPopup();
+
+        // 4. restrict setting moving on map
+        const bounds = L.latLngBounds(
+            [37.550720, 127.073987], // Southwest coordinates
+            [37.550720, 127.073987]  // Northeast coordinates
+
+        );
+
+        // 5. restrict setting about drag
+        map.setMaxBounds(bounds);
+        map.on('drag', function() {
+            map.panInsideBounds(bounds, { animate: false });
+        });
+    </script>
+</html>
