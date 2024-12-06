@@ -116,17 +116,17 @@ Mobius (CSEBase)
   
   ```bash
   python sensor_data.py
-
+```
 ### Execute the control data script to analyze data and send commands:
    
    ```bash
    python control_data.py
-
+```
 ### Execute the actuator control script to retrieve commands and perform actions:
 
    ```bash
    python actuator_control.py
-
+```
 
 # Smart Campus Web Application
 
