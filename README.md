@@ -82,3 +82,26 @@ Mobius (CSEBase)
 - Execute the main.py script to send and retrieve attendance data:
   ```bash
   python main.py
+
+
+# Smart Campus Web Application
+
+---
+
+## Features
+- **User Authentication**: Simple username-password-based login.
+- **Session Management**: Tracks user login state across pages.
+- **Routes**: Multiple routes for different pages (e.g., `login`, `mainpage`, `daeyangai`).
+- **Templating**: Dynamic HTML rendering using Jinja templates.
+
+---
+
+## Prerequisites
+
+Ensure the following are installed on your system:
+- **Python 3.x**
+- **Flask** (`pip install flask`)
+
+---
+
+## File Structure
