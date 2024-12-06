@@ -103,5 +103,3 @@ Ensure the following are installed on your system:
 - **Flask** (`pip install flask`)
 
 ---
-
-## File Structure
