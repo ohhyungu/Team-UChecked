@@ -147,3 +147,93 @@ Ensure the following are installed on your system:
 - **Flask** (`pip install flask`)
 
 ---
+
+# YOLOv5 Space Congestion Analysis
+
+## Overview
+This project utilizes the YOLOv5 object detection model to analyze space congestion using a webcam feed. The application detects people and specific objects (laptops, cups, books, bags, handbags) in predefined regions of interest (ROIs) on the video stream. The results are displayed on the screen in real-time, providing the number of people and the presence of target objects in each ROI.
+
+## Features
+- Real-time object detection using YOLOv5.
+- Tracks the number of people in multiple regions of interest.
+- Detects specific objects including:
+  - Laptop
+  - Cup
+  - Book
+  - Bag
+  - Handbag
+- Highlights detected objects and displays relevant information directly on the video feed.
+
+## Requirements
+Make sure you have the following installed before running the program:
+- Python 3.7 or higher
+- OpenCV
+- PyTorch
+- YOLOv5 (loaded via `torch.hub`)
+
+Install the necessary dependencies with:
+```python
+pip install opencv-python-headless torch torchvision
+```
+## How to Run
+1. Clone the repository or download the script.
+2. Open a terminal in the directory containing the script.
+3. Run the script:
+```python
+pip install opencv-python-headless torch torchvision
+```
+## How to Run
+1. Clone the repository or download the script.
+2. Open a terminal in the directory containing the script.
+3. Run the script:
+```python
+python your_script_name.py
+```
+4. The webcam feed will open, displaying the analysis of the predefined ROIs.
+
+### Controls
+- Press `q` to exit the application.
+
+## Code Explanation
+### Regions of Interest (ROIs)
+The application defines four rectangular areas on the video feed where it performs object detection. These areas are represented as coordinates:
+```python
+rectangles = [(100, 100, 800, 500), (900, 100, 1600, 500), (100, 600, 800, 1000), (900, 600, 1600, 1000)]
+```
+### Object Detection
+The YOLOv5 model detects objects in each ROI. Specific objects and people are tracked:
+- **Class 0**: Person
+- **Class 63**: Laptop
+- **Class 41**: Cup
+- **Class 73**: Book
+- **Class 24**: Bag
+- **Class 26**: Handbag
+
+### Visual Feedback
+- **Red Rectangles**: Indicate the ROIs.
+- **Green Bounding Boxes**: Highlight detected objects within each ROI.
+- Text information on the screen:
+  - Number of people in each area.
+  - Whether specific objects are present in each area.
+
+## Example Use Case
+This application can be used to monitor congestion in areas such as:
+- Libraries
+- Cafeterias
+- Public spaces
+- Workspaces
+
+It provides real-time insights into the number of people and the presence of specific objects, aiding in better space utilization and management.
+
+## Acknowledgments
+- **YOLOv5 Model**: Powered by [Ultralytics](https://github.com/ultralytics/yolov5).
+- **OpenCV**: For real-time video processing.
+- **PyTorch**: For deep learning model support.
+
+## Notes
+- Make sure your webcam is connected and functioning.
+- Adjust the ROI coordinates (`rectangles`) in the code as per your webcam feed resolution and requirements.
+
+## License
+This project is licensed under the MIT License. Feel free to use and modify it for your own purposes.
+
